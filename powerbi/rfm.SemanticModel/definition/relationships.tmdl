@@ -1,0 +1,47 @@
+relationship feebf0b0-6f36-450c-ad2c-327242c6afb6
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_user.signup_date
+	toColumn: LocalDateTable_1b2b3159-c61c-4977-a930-4af584d2e33d.Date
+
+relationship 203bc6dc-35d2-41e3-b460-c8ac51b245a1
+	joinOnDateBehavior: datePartOnly
+	fromColumn: dim_order.order_date
+	toColumn: LocalDateTable_bd754d50-8202-4761-b608-065eac45ccd1.Date
+
+relationship AutoDetected_43e603e7-e66b-45c8-b730-338745b7a980
+	crossFilteringBehavior: bothDirections
+	fromColumn: dws_user_rfm.user_id
+	toColumn: dim_user.user_id
+
+relationship 262594f0-7e1b-18fa-8af5-2449129df0f0
+	fromColumn: order_items.user_id
+	toColumn: dws_user_rfm.user_id
+
+relationship 8e22b074-cb4b-32cb-d599-61905589dc44
+	fromColumn: dim_order.user_id
+	toColumn: dws_user_rfm.user_id
+
+relationship 5eee694b-a382-0930-1c4d-c13ec1167400
+	crossFilteringBehavior: bothDirections
+	fromColumn: order_items.product_id
+	toColumn: dim_product.product_id
+
+relationship be62e683-f3e5-85b1-68d3-b00344b7888c
+	crossFilteringBehavior: bothDirections
+	fromColumn: dws_user_rfm.segment_operation
+	toColumn: dws_customer_category_pref.segment_operation
+
+relationship a1b2c3d4-e5f6-7890-abcd-ef1234567890
+	crossFilteringBehavior: bothDirections
+	fromColumn: segment_category_tgi.segment_operation
+	toColumn: dws_customer_category_pref.segment_operation
+
+relationship b2c3d4e5-f6a7-8901-bcde-f12345678901
+	crossFilteringBehavior: bothDirections
+	fromColumn: segment_brand_tgi.segment_operation
+	toColumn: dws_customer_category_pref.segment_operation
+
+relationship c3d4e5f6-a7b8-9012-cdef-123456789012
+	fromColumn: operational_list.user_id
+	toColumn: dws_user_rfm.user_id
+

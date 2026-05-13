@@ -1,0 +1,29 @@
+model Model
+	culture: zh-CN
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: zh-CN
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["dws_user_rfm","dws_customer_category_pref","dim_user","dim_product","order_items","dim_order","segment_category_tgi","segment_brand_tgi","operational_list"]
+
+annotation PBI_ProTooling = ["DaxQueryView_Desktop","DevMode"]
+
+ref table dws_user_rfm
+ref table dws_customer_category_pref
+ref table dim_user
+ref table DateTableTemplate_a004bd2b-4990-4dde-b9b9-ba62a6b90386
+ref table LocalDateTable_1b2b3159-c61c-4977-a930-4af584d2e33d
+ref table dim_product
+ref table order_items
+ref table dim_order
+ref table LocalDateTable_bd754d50-8202-4761-b608-065eac45ccd1
+ref table segment_category_tgi
+ref table segment_brand_tgi
+ref table operational_list
+
+ref cultureInfo zh-CN
+

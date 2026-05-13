@@ -1,0 +1,68 @@
+table dim_user
+	lineageTag: 476c8765-6159-40b2-8027-a31a35fd42fa
+
+	column user_id
+		dataType: string
+		lineageTag: 7d6d61a1-5703-475e-a096-0e6c4802ffcb
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column name
+		dataType: string
+		lineageTag: 54f6d063-30f4-42ba-ba86-4f38396dac9e
+		summarizeBy: none
+		sourceColumn: name
+
+		annotation SummarizationSetBy = Automatic
+
+	column email
+		dataType: string
+		lineageTag: 617f42c1-610d-47df-bc78-a4fb4df45552
+		summarizeBy: none
+		sourceColumn: email
+
+		annotation SummarizationSetBy = Automatic
+
+	column gender
+		dataType: string
+		lineageTag: 96d95cc8-ad02-4ee7-917b-6f67b3ec2ba4
+		summarizeBy: none
+		sourceColumn: gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column city
+		dataType: string
+		lineageTag: 58a60cc8-93a5-49f2-a99f-b083d5615f2f
+		summarizeBy: none
+		sourceColumn: city
+
+		annotation SummarizationSetBy = Automatic
+
+	column signup_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 1283e0e8-b67d-48e4-a426-80da349d2e34
+		summarizeBy: none
+		sourceColumn: signup_date
+
+		variation 变体
+			isDefault
+			relationship: feebf0b0-6f36-450c-ad2c-327242c6afb6
+			defaultHierarchy: LocalDateTable_1b2b3159-c61c-4977-a930-4af584d2e33d.日期层次结构
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition dim_user = m
+		mode: import
+		source =
+				let
+				    源 = MySQL.Database("localhost:3307", "ecommerce_rfm", [ReturnSingleDatabase=true]),
+				    ecommerce_rfm_dim_user = 源{[Schema="ecommerce_rfm",Item="dim_user"]}[Data]
+				in
+				    ecommerce_rfm_dim_user
+

@@ -1,0 +1,6 @@
+// 欢迎使用 DAX 查询视图!要详细了解 DAX 查询，请访问 https://aka.ms/dax-queries。
+// 右键单击数据窗格中的表、列或度量值以访问快速查询，或向 Copilot 寻求有关编写 DAX 的帮助。
+
+// 选择“运行”以尝试此示例 DAX 查询。
+EVALUATE
+    TOPN(100, 'dws_user_rfm')

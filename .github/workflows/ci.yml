@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - '*.md'
+      - 'docs/**'
+      - 'data/**'
+  pull_request:
+    branches: [main]
+    paths-ignore:
+      - '*.md'
+      - 'docs/**'
+      - 'data/**'
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install -r requirements-dev.txt
+
+      - name: Lint with ruff
+        run: ruff check python/ tests/
+
+      - name: Run tests with coverage
+        run: pytest tests/ --cov=python --cov-report=term-missing -v

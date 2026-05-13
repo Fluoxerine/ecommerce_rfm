@@ -1,0 +1,549 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "vip_category_bar",
+  "position": {
+    "x": 0,
+    "y": 160,
+    "z": 6000,
+    "height": 176,
+    "width": 912,
+    "tabOrder": 6000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dws_customer_category_pref"
+                    }
+                  },
+                  "Property": "top1_category"
+                }
+              },
+              "queryRef": "dws_customer_category_pref.top1_category",
+              "nativeQueryRef": "top1_category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dws_customer_category_pref"
+                    }
+                  },
+                  "Property": "top1_tgi"
+                }
+              },
+              "queryRef": "CountNonNull(dws_customer_category_pref.top1_tgi)",
+              "nativeQueryRef": "top1_tgi"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dws_customer_category_pref"
+                    }
+                  },
+                  "Property": "top2_category"
+                }
+              },
+              "queryRef": "dws_customer_category_pref.top2_category",
+              "nativeQueryRef": "top2_category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dws_customer_category_pref"
+                    }
+                  },
+                  "Property": "top2_tgi"
+                }
+              },
+              "queryRef": "dws_customer_category_pref.top2_tgi",
+              "nativeQueryRef": "top2_tgi"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dws_customer_category_pref"
+                    }
+                  },
+                  "Property": "top3_category"
+                }
+              },
+              "queryRef": "dws_customer_category_pref.top3_category",
+              "nativeQueryRef": "top3_category"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "dws_customer_category_pref"
+                    }
+                  },
+                  "Property": "top3_tgi"
+                }
+              },
+              "queryRef": "dws_customer_category_pref.top3_tgi",
+              "nativeQueryRef": "top3_tgi"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "dws_customer_category_pref"
+                  }
+                },
+                "Property": "top3_category"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
+      }
+    },
+    "objects": {
+      "columnWidth": [
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "192.46601491767174D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dws_customer_category_pref.top1_category"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "112.3769287822762D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "CountNonNull(dws_customer_category_pref.top1_tgi)"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "190.84207286978935D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dws_customer_category_pref.top2_category"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "111.72284724170768D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dws_customer_category_pref.top2_tgi"
+          }
+        },
+        {
+          "properties": {
+            "value": {
+              "expr": {
+                "Literal": {
+                  "Value": "197.76923076923077D"
+                }
+              }
+            }
+          },
+          "selector": {
+            "metadata": "dws_customer_category_pref.top3_category"
+          }
+        }
+      ],
+      "values": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "16D"
+                }
+              }
+            }
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "Not": {
+                              "Expression": {
+                                "Comparison": {
+                                  "ComparisonKind": 0,
+                                  "Left": {
+                                    "Aggregation": {
+                                      "Expression": {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Entity": "dws_customer_category_pref"
+                                            }
+                                          },
+                                          "Property": "top1_category"
+                                        }
+                                      },
+                                      "Function": 3
+                                    }
+                                  },
+                                  "Right": {
+                                    "Literal": {
+                                      "Value": "''"
+                                    }
+                                  }
+                                },
+                                "Annotations": {
+                                  "PowerBI.SQExprEvaluationKind": 1,
+                                  "PowerBI.SQExprTextOperatorOption": 12
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#DEEFFF'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "dws_customer_category_pref.top1_category"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "Not": {
+                              "Expression": {
+                                "Comparison": {
+                                  "ComparisonKind": 0,
+                                  "Left": {
+                                    "Aggregation": {
+                                      "Expression": {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Entity": "dws_customer_category_pref"
+                                            }
+                                          },
+                                          "Property": "top2_category"
+                                        }
+                                      },
+                                      "Function": 3
+                                    }
+                                  },
+                                  "Right": {
+                                    "Literal": {
+                                      "Value": "''"
+                                    }
+                                  }
+                                },
+                                "Annotations": {
+                                  "PowerBI.SQExprEvaluationKind": 1,
+                                  "PowerBI.SQExprTextOperatorOption": 12
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#DEEFFF'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "dws_customer_category_pref.top2_category"
+          }
+        },
+        {
+          "properties": {
+            "backColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Conditional": {
+                      "Cases": [
+                        {
+                          "Condition": {
+                            "Not": {
+                              "Expression": {
+                                "Comparison": {
+                                  "ComparisonKind": 0,
+                                  "Left": {
+                                    "Aggregation": {
+                                      "Expression": {
+                                        "Column": {
+                                          "Expression": {
+                                            "SourceRef": {
+                                              "Entity": "dws_customer_category_pref"
+                                            }
+                                          },
+                                          "Property": "top3_category"
+                                        }
+                                      },
+                                      "Function": 3
+                                    }
+                                  },
+                                  "Right": {
+                                    "Literal": {
+                                      "Value": "''"
+                                    }
+                                  }
+                                },
+                                "Annotations": {
+                                  "PowerBI.SQExprEvaluationKind": 1,
+                                  "PowerBI.SQExprTextOperatorOption": 12
+                                }
+                              }
+                            }
+                          },
+                          "Value": {
+                            "Literal": {
+                              "Value": "'#DEEFFF'"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "selector": {
+            "data": [
+              {
+                "dataViewWildcard": {
+                  "matchingOption": 1
+                }
+              }
+            ],
+            "metadata": "dws_customer_category_pref.top3_category"
+          }
+        }
+      ],
+      "columnHeaders": [
+        {
+          "properties": {
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "15D"
+                }
+              }
+            },
+            "alignment": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Left'"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "total": [
+        {
+          "properties": {
+            "totals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'VIP 品类偏好 TGI'"
+                }
+              }
+            },
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "fontSize": {
+              "expr": {
+                "Literal": {
+                  "Value": "22D"
+                }
+              }
+            },
+            "bold": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "spacing": [
+        {
+          "properties": {
+            "verticalSpacing": {
+              "expr": {
+                "Literal": {
+                  "Value": "10D"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "61a53b065fd796be68bf",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "dws_customer_category_pref"
+              }
+            },
+            "Property": "segment_operation"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "dws_customer_category_pref",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "segment_operation"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'至尊VIP'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

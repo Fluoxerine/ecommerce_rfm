@@ -1,0 +1,135 @@
+table operational_list
+	lineageTag: 1c2d3e4f-5a6b-7c8d-9e0f-1a2b3c4d5e6f
+
+	measure 'Strategy Total Users' = COUNTROWS(operational_list)
+		formatString: #,##0
+		lineageTag: 11111111-aaaa-1111-aaaa-111111111111
+
+	measure 'P0 Priority Count' = CALCULATE(COUNTROWS(operational_list), operational_list[priority] = 0)
+		formatString: #,##0
+		lineageTag: 22222222-bbbb-2222-bbbb-222222222222
+
+	measure 'P1 Priority Count' = CALCULATE(COUNTROWS(operational_list), operational_list[priority] = 1)
+		formatString: #,##0
+		lineageTag: 33333333-cccc-3333-cccc-333333333333
+
+	column user_id
+		dataType: string
+		lineageTag: 2d3e4f5a-6b7c-8d9e-0f1a-2b3c4d5e6f7a
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_operation
+		dataType: string
+		lineageTag: 3e4f5a6b-7c8d-9e0f-1a2b-3c4d5e6f7a8b
+		summarizeBy: none
+		sourceColumn: segment_operation
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 4f5a6b7c-8d9e-0f1a-2b3c-4d5e6f7a8b9c
+		summarizeBy: sum
+		sourceColumn: order_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_amount
+		dataType: double
+		lineageTag: 5a6b7c8d-9e0f-1a2b-3c4d-5e6f7a8b9c0d
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column days_since_order
+		dataType: int64
+		formatString: 0
+		lineageTag: 6b7c8d9e-0f1a-2b3c-4d5e-6f7a8b9c0d1e
+		summarizeBy: sum
+		sourceColumn: days_since_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column priority
+		dataType: int64
+		formatString: 0
+		lineageTag: 7c8d9e0f-1a2b-3c4d-5e6f-7a8b9c0d1e2f
+		summarizeBy: sum
+		sourceColumn: priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column estimated_response_rate
+		dataType: double
+		formatString: 0.0%
+		lineageTag: 8d9e0f1a-2b3c-4d5e-6f7a-8b9c0d1e2f3a
+		summarizeBy: sum
+		sourceColumn: estimated_response_rate
+
+		annotation SummarizationSetBy = Automatic
+
+	column action
+		dataType: string
+		lineageTag: 9e0f1a2b-3c4d-5e6f-7a8b-9c0d1e2f3a4b
+		summarizeBy: none
+		sourceColumn: action
+
+		annotation SummarizationSetBy = Automatic
+
+	partition operational_list = m
+		mode: import
+		source =
+				let
+				    源 = MySQL.Database("localhost:3307", "ecommerce_rfm", [ReturnSingleDatabase=true]),
+				    Query = Value.NativeQuery(源, "SELECT
+				    user_id,
+				    segment_operation,
+				    order_count,
+				    total_amount,
+				    days_since_order,
+				    CASE segment_operation
+				        WHEN '至尊VIP' THEN 0
+				        WHEN '核心高价值忠诚用户' THEN 0
+				        WHEN '活跃复购潜力用户' THEN 1
+				        WHEN '高潜新客' THEN 1
+				        WHEN '唤醒高潜' THEN 1
+				        WHEN '流失高潜用户' THEN 2
+				        WHEN '普通新客' THEN 2
+				        WHEN '唤醒普通' THEN 3
+				        WHEN '流失低潜' THEN 4
+				        WHEN '流失可弃' THEN 4
+				    END AS priority,
+				    CASE segment_operation
+				        WHEN '至尊VIP' THEN 0.40
+				        WHEN '核心高价值忠诚用户' THEN 0.35
+				        WHEN '活跃复购潜力用户' THEN 0.25
+				        WHEN '高潜新客' THEN 0.20
+				        WHEN '普通新客' THEN 0.12
+				        WHEN '唤醒高潜' THEN 0.15
+				        WHEN '唤醒普通' THEN 0.05
+				        WHEN '流失高潜用户' THEN 0.10
+				        WHEN '流失可弃' THEN 0.01
+				        WHEN '流失低潜' THEN 0.03
+				    END AS estimated_response_rate,
+				    CASE segment_operation
+				        WHEN '至尊VIP' THEN 'P0-新品电子首发通知+品牌日专属折扣+专属客服'
+				        WHEN '核心高价值忠诚用户' THEN 'P0-Groceries/Beauty复购券+会员升级+全品类满减'
+				        WHEN '活跃复购潜力用户' THEN 'P1-Books/Sports品类优惠券+交叉销售推荐+积分翻倍'
+				        WHEN '高潜新客' THEN 'P1-首单复购引导+配套推荐+专属客服跟进'
+				        WHEN '普通新客' THEN 'P2-7天复购提醒+品类教育邮件+首单满减券'
+				        WHEN '唤醒高潜' THEN 'P1-定向召回+限时折扣+30天有效'
+				        WHEN '唤醒普通' THEN 'P3-常规召回邮件+大促通知+小额优惠券'
+				        WHEN '流失高潜用户' THEN 'P2-精准召回+品类强激励+双重触达'
+				        WHEN '流失可弃' THEN 'P4-不主动触达，仅大促被动覆盖'
+				        WHEN '流失低潜' THEN 'P4-季度触达+大促通知'
+				    END AS action
+				FROM dws_user_rfm
+				ORDER BY priority, total_amount DESC", null)
+				in
+				    Query
+

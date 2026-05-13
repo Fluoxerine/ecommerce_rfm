@@ -1,0 +1,28 @@
+# Power BI local config & cache
+*settings.local.json
+*.abf
+.pbi/
+
+# Data files
+data/*.csv
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Output (charts are portfolio artifacts, keep them visible)
+output/*.csv
+output/*.log
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Sensitive config
+.env
+!.env.example

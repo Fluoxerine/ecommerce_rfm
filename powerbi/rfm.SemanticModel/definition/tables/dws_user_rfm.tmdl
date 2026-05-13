@@ -1,0 +1,177 @@
+table dws_user_rfm
+	lineageTag: 2f792475-a0fb-4076-a162-0517fc74f337
+
+	measure 'Total Users' = COUNTROWS(dws_user_rfm)
+		lineageTag: 15473cae-0f60-46f3-9e3d-ece0ad64f206
+
+	measure 'Total Revenue' = SUM(dws_user_rfm[total_amount])
+		lineageTag: 4f67ed12-6f14-4b5e-b3fd-c40907ba8398
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Revenue Per User' = AVERAGE(dws_user_rfm[total_amount])
+		lineageTag: cc121158-3314-4b26-997a-f4d7e698b9a5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Order Count' = AVERAGE(dws_user_rfm[order_count])
+		lineageTag: 4e006efe-c05a-4dca-9601-7a7b1eaa9c92
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Recency' = AVERAGE(dws_user_rfm[days_since_order])
+		lineageTag: 3ec2f398-c47a-474d-9f33-b31a0944e549
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'VIP Count' = CALCULATE(COUNTROWS(dws_user_rfm), dws_user_rfm[segment_operation] = "至尊VIP")
+		formatString: 0
+		lineageTag: 4249e5b8-024a-4f29-a2ca-ea282150e353
+
+	measure 'VIP Revenue' = CALCULATE(SUM(dws_user_rfm[total_amount]), dws_user_rfm[segment_operation] = "至尊VIP")
+		formatString: 'US$'#,0.00
+		lineageTag: a1a1a1a1-bbbb-cccc-dddd-eeeeeeeeeeee
+
+	measure 'VIP ARPU' = DIVIDE([VIP Revenue], [VIP Count])
+		formatString: 'US$'#,0.00
+		lineageTag: b2b2b2b2-cccc-dddd-eeee-ffffffffffff
+
+	measure 'VIP Revenue Pct' = DIVIDE([VIP Revenue], [Total Revenue])
+		formatString: 0.0%
+		lineageTag: c3c3c3c3-dddd-eeee-ffff-000000000000
+
+	column user_id
+		dataType: string
+		lineageTag: 03c6a27c-dae0-4bd8-8a1c-91b5c995c4cb
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_count
+		dataType: int64
+		formatString: 0
+		lineageTag: 3c117d56-2eed-493d-a4f6-0e50754775e1
+		summarizeBy: sum
+		sourceColumn: order_count
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_amount
+		dataType: double
+		lineageTag: 951bce3e-5626-4281-9c21-af2ed3390085
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column days_since_order
+		dataType: int64
+		formatString: 0
+		lineageTag: a5d9179e-6fb6-49a4-8c98-64bc43ce65ea
+		summarizeBy: sum
+		sourceColumn: days_since_order
+
+		annotation SummarizationSetBy = Automatic
+
+	column r_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 3ebbc08d-d1c5-4888-a05f-2a87628d81d8
+		summarizeBy: sum
+		sourceColumn: r_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column f_score
+		dataType: int64
+		formatString: 0
+		lineageTag: b51bfb8d-eb03-4bbb-ac35-2b095881b6c8
+		summarizeBy: sum
+		sourceColumn: f_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_score
+		dataType: int64
+		formatString: 0
+		lineageTag: 44dbada3-6e38-4e81-b62a-a135c75246c3
+		summarizeBy: sum
+		sourceColumn: m_score
+
+		annotation SummarizationSetBy = Automatic
+
+	column m_p25
+		dataType: double
+		lineageTag: 5918900b-eadd-4af6-ba61-d214e4c6bb54
+		summarizeBy: sum
+		sourceColumn: m_p25
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column m_p75
+		dataType: double
+		lineageTag: 73bb6a32-acc6-4ee1-9abe-4fd1b77e48d5
+		summarizeBy: sum
+		sourceColumn: m_p75
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column vip_threshold
+		dataType: double
+		lineageTag: e3213f4d-6324-4931-ac7d-fdfbe62558ee
+		summarizeBy: sum
+		sourceColumn: vip_threshold
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_vip
+		dataType: int64
+		formatString: 0
+		lineageTag: 6a545d10-1e6e-44b0-ad84-5d210edccea6
+		summarizeBy: sum
+		sourceColumn: is_vip
+
+		annotation SummarizationSetBy = Automatic
+
+	column rfm_combined
+		dataType: string
+		lineageTag: 443b42ba-6c07-4f55-8681-b93c1364c1d1
+		summarizeBy: none
+		sourceColumn: rfm_combined
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_19
+		dataType: string
+		lineageTag: 25dd74f4-26ab-40f4-832a-39b90bf4b699
+		summarizeBy: none
+		sourceColumn: segment_19
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_operation
+		dataType: string
+		lineageTag: 81e174f7-0b76-4870-a406-72994643cfff
+		summarizeBy: none
+		sourceColumn: segment_operation
+
+		annotation SummarizationSetBy = Automatic
+
+	partition dws_user_rfm = m
+		mode: import
+		source =
+				let
+				    源 = MySQL.Database("localhost:3307", "ecommerce_rfm", [ReturnSingleDatabase=true]),
+				    ecommerce_rfm_dws_user_rfm = 源{[Schema="ecommerce_rfm",Item="dws_user_rfm"]}[Data]
+				in
+				    ecommerce_rfm_dws_user_rfm
+

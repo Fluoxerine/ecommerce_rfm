@@ -1,0 +1,5 @@
+1."D:\D30360\Documents\ecommerce\20260507_1\docs\01-background.md"里的问题一"月营销预算 20,000 元"最后如何分配的?成功标准"分群可运营"的"每组 ≥ 16 人（统计有意义的最小样本），内部行为一致性高"的依据是什么?最后的"整体预估 ROI > 3:1"实现了吗?
+2.数据库ecommerce_rfm表dws_customer_category_pref对于brand的分析没有top3的
+3."D:\D30360\Documents\ecommerce\20260507_1\docs\04-results.md"发现3的"对活跃复购潜力用户加大投入（ROI 5.7:1）"ROI计算有依据吗?还要详细介绍一下发现4的统计检验
+4."D:\D30360\Documents\ecommerce\20260507_1\docs\comprehensive-review.md"二、逻辑一致性评估中的优点"每组 ≥ 16 人的最低样本量保证了统计意义"为什么多余16人保证了统计学意义?"t 检验（VIP vs 流失低潜消费金额差异）"只做了VIP vs 流失低潜消费金额差异?
+5."D:\D30360\Documents\ecommerce\20260507_1\operations\strategy.md"响应率乘数模型的不同乘数是如何确定的?依据是什么?还有这个乘数模型本身的依据?最后的各组ROI和业内实际偏差大吗?

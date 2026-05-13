@@ -1,0 +1,133 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 92.800003051757813,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 300.33597051690469,
+            "y": 249.20328246517496
+          },
+          "nodeIndex": "dws_user_rfm",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 589.13478371764791,
+            "y": 464.53455498235496
+          },
+          "nodeIndex": "dim_order",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 876.28653362394743,
+            "y": 229.74677671684736
+          },
+          "nodeIndex": "dim_product",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": -30.442967906735703
+          },
+          "nodeIndex": "dim_user",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1126.2865336239474,
+            "y": 0
+          },
+          "nodeIndex": "dws_customer_category_pref",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 589.46266988334889,
+            "y": -50
+          },
+          "nodeIndex": "order_items",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1360.2865336239474,
+            "y": 221.26727749117748
+          },
+          "nodeIndex": "operational_list",
+          "nodeLineageTag": "1c2d3e4f-5a6b-7c8d-9e0f-1a2b3c4d5e6f",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1644.2865336239474,
+            "y": 245.26727749117748
+          },
+          "nodeIndex": "segment_brand_tgi",
+          "nodeLineageTag": "4b8c9d0e-1f2a-3b4c-5d6e-7f8a9b0c1d2e",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1928.2865336239474,
+            "y": 245.26727749117748
+          },
+          "nodeIndex": "segment_category_tgi",
+          "nodeLineageTag": "7a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "所有表",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "所有表",
+  "defaultDiagram": "所有表"
+}

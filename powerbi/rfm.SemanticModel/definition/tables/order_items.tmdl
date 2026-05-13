@@ -1,0 +1,73 @@
+table order_items
+	lineageTag: a2b1355d-ecbd-4c36-9f2f-48ed7b3bfdb7
+
+	column order_item_id
+		dataType: string
+		lineageTag: 1b8512ac-c466-40d4-95cb-1f46cdf4556f
+		summarizeBy: none
+		sourceColumn: order_item_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_id
+		dataType: string
+		lineageTag: 3256eae5-1167-4e48-9db2-809cb34dae69
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_id
+		dataType: string
+		lineageTag: 4fce1385-d4be-445e-b876-9f31a54c8039
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: string
+		lineageTag: 8b4ff21a-250f-4872-8fce-da675ce52b80
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 196f8b0d-7767-4abe-8ee2-11c02fb6aaa9
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column item_price
+		dataType: double
+		lineageTag: 70c14efd-1afe-4cf5-b76d-d4fb71c16374
+		summarizeBy: sum
+		sourceColumn: item_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column item_total
+		dataType: double
+		lineageTag: 2d54afd5-a709-46d5-9359-6f76c8da6bb9
+		summarizeBy: sum
+		sourceColumn: item_total
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition order_items = m
+		mode: import
+		source =
+				let
+				    源 = MySQL.Database("localhost:3307", "ecommerce_rfm", [ReturnSingleDatabase=true]),
+				    ecommerce_rfm_order_items = 源{[Schema="ecommerce_rfm",Item="order_items"]}[Data]
+				in
+				    ecommerce_rfm_order_items
+

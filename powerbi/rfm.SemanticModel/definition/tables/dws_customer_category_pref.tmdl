@@ -1,0 +1,167 @@
+table dws_customer_category_pref
+	lineageTag: 6f28f17a-26c1-487a-b64b-723d2200da82
+
+	column segment_operation
+		dataType: string
+		lineageTag: 2faa9d6c-e961-41db-a9cc-7754c23c00bc
+		summarizeBy: none
+		sourceColumn: segment_operation
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_orders
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c8f50bc-5a73-45ba-9277-3018856aa2e5
+		summarizeBy: none
+		sourceColumn: total_orders
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_amount
+		dataType: double
+		lineageTag: 56c1e4f4-1bc4-4690-a2f4-b8c8553f70cc
+		summarizeBy: none
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column total_quantity
+		dataType: double
+		lineageTag: 9c642bd3-bd29-474b-b913-eed89634b08b
+		summarizeBy: none
+		sourceColumn: total_quantity
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column avg_unit_price
+		dataType: double
+		lineageTag: 76c5e131-c025-437d-b8f3-c039ccb09d37
+		summarizeBy: none
+		sourceColumn: avg_unit_price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column top1_category
+		dataType: string
+		lineageTag: 13e0b809-d944-4385-b691-43bbcc6df3b4
+		summarizeBy: none
+		sourceColumn: top1_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column top1_tgi
+		dataType: double
+		lineageTag: 9b67a789-028f-4bc0-9206-1e2cebc52a06
+		summarizeBy: none
+		sourceColumn: top1_tgi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column top2_category
+		dataType: string
+		lineageTag: a3af9943-b8fe-45d7-9397-b7d41210ef9b
+		summarizeBy: none
+		sourceColumn: top2_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column top2_tgi
+		dataType: double
+		lineageTag: 0f6a13c5-b5e4-4e9d-90e0-12a2e5be57f1
+		summarizeBy: none
+		sourceColumn: top2_tgi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column top3_category
+		dataType: string
+		lineageTag: ee60af9d-a5d4-4d70-bb75-db831fc17e6c
+		summarizeBy: none
+		sourceColumn: top3_category
+
+		annotation SummarizationSetBy = Automatic
+
+	column top3_tgi
+		dataType: double
+		lineageTag: 6831625c-61a6-47ed-b664-cf2ae8ef1420
+		summarizeBy: none
+		sourceColumn: top3_tgi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column top1_brand
+		dataType: string
+		lineageTag: 12de43dc-0424-47c4-9c14-2ea2733025da
+		summarizeBy: none
+		sourceColumn: top1_brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column top1_brand_tgi
+		dataType: double
+		lineageTag: 40e27beb-52bd-4261-a54a-b1c3c30ae5ec
+		summarizeBy: none
+		sourceColumn: top1_brand_tgi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column top2_brand
+		dataType: string
+		lineageTag: 93b80935-130d-48e7-b75e-8fa2846e7f7b
+		summarizeBy: none
+		sourceColumn: top2_brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column top2_brand_tgi
+		dataType: double
+		lineageTag: d791e4d0-58ab-4491-9699-9e4937531f65
+		summarizeBy: none
+		sourceColumn: top2_brand_tgi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column top3_brand
+		dataType: string
+		lineageTag: 3a7f1c8e-b2d5-4a39-9c61-7e5d2f4b1a06
+		summarizeBy: none
+		sourceColumn: top3_brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column top3_brand_tgi
+		dataType: double
+		lineageTag: 5b9e2d7c-a1f4-4b38-8d52-6c4e1f3a2b07
+		summarizeBy: none
+		sourceColumn: top3_brand_tgi
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dws_customer_category_pref = m
+		mode: import
+		source =
+				let
+				    源 = MySQL.Database("localhost:3307", "ecommerce_rfm", [ReturnSingleDatabase=true]),
+				    ecommerce_rfm_dws_customer_category_pref = 源{[Schema="ecommerce_rfm",Item="dws_customer_category_pref"]}[Data]
+				in
+				    ecommerce_rfm_dws_customer_category_pref
+

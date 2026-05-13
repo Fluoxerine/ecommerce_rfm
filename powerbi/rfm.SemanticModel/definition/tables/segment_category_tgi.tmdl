@@ -1,0 +1,86 @@
+table segment_category_tgi
+	lineageTag: 7a1b2c3d-4e5f-6a7b-8c9d-0e1f2a3b4c5d
+
+	column segment_operation
+		dataType: string
+		lineageTag: 8b2c3d4e-5f6a-7b8c-9d0e-1f2a3b4c5d6e
+		summarizeBy: none
+		sourceColumn: segment_operation
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: 9c3d4e5f-6a7b-8c9d-0e1f-2a3b4c5d6e7f
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_amount
+		dataType: double
+		lineageTag: 0d4e5f6a-7b8c-9d0e-1f2a-3b4c5d6e7f8a
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+	column segment_pct
+		dataType: double
+		lineageTag: 1e5f6a7b-8c9d-0e1f-2a3b-4c5d6e7f8a9b
+		summarizeBy: sum
+		sourceColumn: segment_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column overall_pct
+		dataType: double
+		lineageTag: 2f6a7b8c-9d0e-1f2a-3b4c-5d6e7f8a9b0c
+		summarizeBy: sum
+		sourceColumn: overall_pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column TGI
+		dataType: double
+		formatString: 0
+		lineageTag: 3a7b8c9d-0e1f-2a3b-4c5d-6e7f8a9b0c1d
+		summarizeBy: sum
+		sourceColumn: TGI
+
+		annotation SummarizationSetBy = Automatic
+
+	partition segment_category_tgi = m
+		mode: import
+		source =
+				let
+				    源 = MySQL.Database("localhost:3307", "ecommerce_rfm", [ReturnSingleDatabase=true]),
+				    Query = Value.NativeQuery(源, "WITH
+				all_category AS (
+				    SELECT p.category,
+				           SUM(oi.item_total) * 100.0 / SUM(SUM(oi.item_total)) OVER () AS amount_pct
+				    FROM order_items oi JOIN dim_product p ON oi.product_id = p.product_id
+				    GROUP BY p.category
+				),
+				segment_category AS (
+				    SELECT r.segment_operation, p.category, SUM(oi.item_total) AS total_amount
+				    FROM order_items oi JOIN dim_product p ON oi.product_id = p.product_id
+				    JOIN dws_user_rfm r ON oi.user_id = r.user_id
+				    WHERE r.segment_operation IS NOT NULL
+				    GROUP BY r.segment_operation, p.category
+				),
+				segment_total AS (
+				    SELECT segment_operation, SUM(total_amount) AS st
+				    FROM segment_category GROUP BY segment_operation
+				)
+				SELECT sc.segment_operation, sc.category, sc.total_amount,
+				       ROUND(sc.total_amount * 100.0 / st.st, 1) AS segment_pct,
+				       ROUND(ac.amount_pct, 1) AS overall_pct,
+				       ROUND((sc.total_amount * 100.0 / st.st) / ac.amount_pct * 100, 0) AS TGI
+				FROM segment_category sc
+				JOIN segment_total st ON sc.segment_operation = st.segment_operation
+				JOIN all_category ac ON sc.category = ac.category
+				ORDER BY sc.segment_operation, TGI DESC", null)
+				in
+				    Query
+

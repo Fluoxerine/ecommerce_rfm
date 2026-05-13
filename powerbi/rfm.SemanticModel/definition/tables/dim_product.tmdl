@@ -1,0 +1,64 @@
+table dim_product
+	lineageTag: 2db9c5e4-100a-4cd6-94ca-e487e23628f7
+
+	column product_id
+		dataType: string
+		lineageTag: 4bb6f9c3-0477-4799-9885-988daae78cbc
+		summarizeBy: none
+		sourceColumn: product_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_name
+		dataType: string
+		lineageTag: 3ceb1384-9fb9-460e-ab90-2008722f402b
+		summarizeBy: none
+		sourceColumn: product_name
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: bdbd1acd-c08d-47ca-b37d-c0aed31e1f0b
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column brand
+		dataType: string
+		lineageTag: 16261225-3e27-4a28-8f61-2b73e9729d39
+		summarizeBy: none
+		sourceColumn: brand
+
+		annotation SummarizationSetBy = Automatic
+
+	column price
+		dataType: double
+		lineageTag: d65e0bb8-f39c-4d82-bea8-cccc8470abfc
+		summarizeBy: none
+		sourceColumn: price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column rating
+		dataType: double
+		lineageTag: 1534275e-7855-4691-a358-7f7fb80e55be
+		summarizeBy: none
+		sourceColumn: rating
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_product = m
+		mode: import
+		source =
+				let
+				    源 = MySQL.Database("localhost:3307", "ecommerce_rfm", [ReturnSingleDatabase=true]),
+				    ecommerce_rfm_dim_product = 源{[Schema="ecommerce_rfm",Item="dim_product"]}[Data]
+				in
+				    ecommerce_rfm_dim_product
+

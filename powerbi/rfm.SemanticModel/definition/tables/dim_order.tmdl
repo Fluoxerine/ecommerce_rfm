@@ -1,0 +1,60 @@
+table dim_order
+	lineageTag: 6648a580-4ed9-4170-875a-ad04ada8a503
+
+	column order_id
+		dataType: string
+		lineageTag: 5d8f148c-6bb3-478c-ab4c-a8cf0d15e817
+		summarizeBy: none
+		sourceColumn: order_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column user_id
+		dataType: string
+		lineageTag: 1419fa9a-da15-4f9f-b7ce-937929c6e253
+		summarizeBy: none
+		sourceColumn: user_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: ae4937fa-3795-409f-a617-5a12d8f5c991
+		summarizeBy: none
+		sourceColumn: order_date
+
+		variation 变体
+			isDefault
+			relationship: 203bc6dc-35d2-41e3-b460-c8ac51b245a1
+			defaultHierarchy: LocalDateTable_bd754d50-8202-4761-b608-065eac45ccd1.日期层次结构
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_status
+		dataType: string
+		lineageTag: edef1033-e8a5-4119-984e-fc55afd80e69
+		summarizeBy: none
+		sourceColumn: order_status
+
+		annotation SummarizationSetBy = Automatic
+
+	column total_amount
+		dataType: double
+		lineageTag: 7cd110e8-bd05-46c3-aa63-103cd99eb97d
+		summarizeBy: sum
+		sourceColumn: total_amount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition dim_order = m
+		mode: import
+		source =
+				let
+				    源 = MySQL.Database("localhost:3307", "ecommerce_rfm", [ReturnSingleDatabase=true]),
+				    ecommerce_rfm_dim_order = 源{[Schema="ecommerce_rfm",Item="dim_order"]}[Data]
+				in
+				    ecommerce_rfm_dim_order
+

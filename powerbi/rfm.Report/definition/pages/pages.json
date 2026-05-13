@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/pagesMetadata/1.0.0/schema.json",
+  "pageOrder": [
+    "e006e64e13922b8c3e6d",
+    "user_profile",
+    "vip_profile",
+    "rfm_detail",
+    "tgi_preferences",
+    "operations_strategy"
+  ],
+  "activePageName": "user_profile"
+}
