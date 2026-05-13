@@ -22,7 +22,6 @@ def clean_orders(orders: pd.DataFrame, users: pd.DataFrame,
 
     # 规则 2：过滤 total_amount <= 0
     before = len(cleaned)
-    discarded_amount = cleaned[cleaned['total_amount'] <= 0]
     cleaned = cleaned[cleaned['total_amount'] > 0].copy()
     n_amount = before - len(cleaned)
     logger.info("规则2 - 过滤金额≤0: %s 条 (过滤 %s 条)",
@@ -33,7 +32,6 @@ def clean_orders(orders: pd.DataFrame, users: pd.DataFrame,
     users_signup['signup_date'] = pd.to_datetime(users_signup['signup_date'])
     cleaned['order_date'] = pd.to_datetime(cleaned['order_date'])
 
-    n_before_merge = len(cleaned)
     cleaned = cleaned.merge(users_signup, on='user_id', how='left')
 
     # 检测缺失注册日期的用户

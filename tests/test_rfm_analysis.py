@@ -4,7 +4,6 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / 'python'))
 
 import pandas as pd
-import numpy as np
 import pytest
 from rfm_analysis import (
     _segment_19_name,

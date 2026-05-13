@@ -2,10 +2,9 @@
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-import matplotlib.ticker as mticker
 import numpy as np
 import pandas as pd
-from config import COLORS, SEGMENT_COLORS, CHART_DIR, R_THRESHOLDS, DATA_DIR, logger
+from config import COLORS, SEGMENT_COLORS, CHART_DIR, DATA_DIR, logger
 
 # ── 中文字体 ──────────────────────────────────────────
 matplotlib.rcParams['font.sans-serif'] = ['Microsoft YaHei', 'SimHei', 'KaiTi']
@@ -127,7 +126,7 @@ def plot_rfm_dashboard(user_summary: pd.DataFrame) -> None:
     # ---- 中下: 箱线图 ----
     ax5 = fig.add_subplot(2, 3, 5)
     ax5.set_facecolor('#FFFFFF')
-    bp = ax5.boxplot(m_col, vert=True, patch_artist=True,
+    ax5.boxplot(m_col, vert=True, patch_artist=True,
                      boxprops=dict(facecolor=COLORS['primary'], alpha=0.6),
                      medianprops=dict(color='#E74C3C', linewidth=2.5),
                      flierprops=dict(marker='o', markersize=3, alpha=0.4))
@@ -435,8 +434,6 @@ def plot_rfm_bubble(user_summary: pd.DataFrame) -> None:
 # ================================================================
 def plot_strategy_matrix(user_summary: pd.DataFrame) -> None:
     """策略矩阵：X=ROI估算 Y=用户数 气泡=营收 颜色=运营组"""
-    from config import ROI_BENCHMARKS as RB
-
     dist = user_summary['segment_operation'].value_counts()
     segs = sorted(dist.index, key=_segment_sort_key)
 

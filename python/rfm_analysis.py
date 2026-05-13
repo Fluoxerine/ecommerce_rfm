@@ -274,7 +274,7 @@ def statistical_tests(user_summary: pd.DataFrame) -> None:
         seg_arr = user_summary['segment_operation'].values
         tukey = pairwise_tukeyhsd(m_arr, seg_arr, alpha=0.05)
         summary_df = pd.DataFrame(tukey.summary().data[1:], columns=tukey.summary().data[0])
-        sig_pairs = summary_df[summary_df['reject'] == True]
+        sig_pairs = summary_df[summary_df['reject']]
         logger.info("4) Tukey HSD 事后检验（M值）——显著差异组对 (p<0.05): %d/%d",
                     len(sig_pairs), len(summary_df))
         if len(sig_pairs) == 0:
